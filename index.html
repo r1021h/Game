@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>치현이의 놀이터 - 레트로 아케이드 & 커뮤니티</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        neonGreen: '#39FF14',
+                        neonPink: '#FF007F',
+                        neonBlue: '#00F0FF',
+                        darkBg: '#0D0E15'
+                    },
+                    boxShadow: {
+                        neonG: '0 0 15px rgba(57, 255, 20, 0.6)',
+                        neonP: '0 0 15px rgba(255, 0, 127, 0.6)',
+                        neonB: '0 0 15px rgba(0, 240, 255, 0.6)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@300;400;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #0D0E15;
+            color: #E2E8F0;
+        }
+        
+        .retro-title {
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.8), 0 0 20px rgba(0, 240, 255, 0.4);
+        }
+        
+        .neon-text-pink {
+            text-shadow: 0 0 8px rgba(255, 0, 127, 0.8);
+        }
+
+        .neon-text-green {
+            text-shadow: 0 0 8px rgba(57, 255, 20, 0.8);
+        }
+
+        /* 스크롤바 커스텀 */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1A1C29;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FF007F;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+    <!-- 상단 네비게이션 헤더 -->
+    <header class="border-b border-gray-800 bg-[#121420] sticky top-0 z-50 px-4 py-3 shadow-lg">
+        <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="showSection('home')">
+                <span class="text-2xl font-black retro-title text-neonBlue">치현이의 놀이터</span>
+                <span class="bg-neonPink text-black text-[10px] font-bold px-2 py-0.5 rounded-full animate-pulse shadow-neonP">Hobby Zone</span>
+            </div>
+            
+            <nav class="flex space-x-1 sm:space-x-3 text-sm font-semibold">
+                <button onclick="showSection('home')" class="nav-btn px-3 py-2 rounded-lg text-neonBlue border border-neonBlue shadow-neonB bg-[#121420] transition-all hover:bg-neonBlue hover:text-black">홈</button>
+                <button onclick="showSection('arcade')" class="nav-btn px-3 py-2 rounded-lg text-gray-400 hover:text-neonPink transition-all hover:border hover:border-neonPink">아케이드 룸</button>
+                <button onclick="showSection('community')" class="nav-btn px-3 py-2 rounded-lg text-gray-400 hover:text-neonGreen transition-all hover:border hover:border-neonGreen">아지트 (수다방)</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 메인 컨텐츠 영역 -->
+    <main class="max-w-6xl mx-auto w-full flex-grow p-4 sm:p-6">
+        
+        <!-- ================= [1. 홈 화면 섹션] ================= -->
+        <section id="home" class="space-y-8 py-4">
+            <!-- 히로 배너 -->
+            <div class="relative rounded-2xl overflow-hidden bg-gradient-to-r from-purple-900/40 via-[#1A1C29] to-blue-900/40 border border-gray-800 p-6 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+                <div class="space-y-4 max-w-lg">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight">
+                        레트로 <span class="text-neonPink neon-text-pink">게임</span>과 <br>
+                        즐거운 <span class="text-neonBlue retro-title">소통</span>의 공간!
+                    </h1>
+                    <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+                        일할 땐 일하고, 쉴 때는 신나게! 플래시 추억을 살린 HTML5 기반의 고전 아케이드 게임을 설치 없이 실시간으로 즐겨보세요.
+                    </p>
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <button onclick="showSection('arcade')" class="px-5 py-3 bg-neonPink hover:bg-pink-600 text-black font-extrabold rounded-lg shadow-neonP transition-all flex items-center gap-2">
+                            🎮 게임 한판 하기
+                        </button>
+                        <button onclick="showSection('community')" class="px-5 py-3 bg-gray-800 hover:bg-gray-700 text-neonGreen border border-neonGreen rounded-lg shadow-neonG transition-all">
+                            💬 방명록 작성하기
+                        </button>
+                    </div>
+                </div>
+                <!-- 레트로 네온 일러스트 대용 장식 -->
+                <div class="w-64 h-64 shrink-0 rounded-2xl border-2 border-dashed border-neonBlue/30 flex items-center justify-center bg-[#0F111E] relative shadow-neonB/10">
+                    <div class="absolute inset-0 bg-radial-gradient from-neonBlue/10 to-transparent animate-pulse"></div>
+                    <div class="text-center space-y-3 z-10">
+                        <div class="text-5xl animate-bounce">👾</div>
+                        <div class="font-mono text-neonBlue text-sm">COIN : 999+</div>
+                        <div class="text-xs text-gray-500">PRESS START BUTTON</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 동호회 가상 인포 보드 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 카드 1 -->
+                <div class="p-5 bg-[#121420] border border-gray-800 rounded-xl space-y-3">
+                    <div class="w-10 h-10 rounded-lg bg-neonBlue/10 flex items-center justify-center text-neonBlue text-xl">🕹️</div>
+                    <h3 class="text-lg font-bold text-white">무설치 즉시 플레이</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">플래시 플레이어가 없어도 HTML5 Canvas 기술로 스마트폰이나 PC에서 깔끔하게 실행됩니다.</p>
+                </div>
+                <!-- 카드 2 -->
+                <div class="p-5 bg-[#121420] border border-gray-800 rounded-xl space-y-3">
+                    <div class="w-10 h-10 rounded-lg bg-neonPink/10 flex items-center justify-center text-neonPink text-xl">🏆</div>
+                    <h3 class="text-lg font-bold text-white">실시간 랭킹 & 챌린지</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">로컬에 실시간으로 최고 기록이 저장되어, 친구가 놀러 왔을 때 랭킹 대결을 펼치기 유용합니다.</p>
+                </div>
+                <!-- 카드 3 -->
+                <div class="p-5 bg-[#121420] border border-gray-800 rounded-xl space-y-3">
+                    <div class="w-10 h-10 rounded-lg bg-neonGreen/10 flex items-center justify-center text-neonGreen text-xl">📣</div>
+                    <h3 class="text-lg font-bold text-white">동호회원 가상 채팅</h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">수다방에서 가상의 다른 유저(인공지능)들과 수다를 떨고 정보를 공유해 보세요.</p>
+                </div>
+            </div>
+
+            <!-- 미니 아케이드 미리보기 목록 -->
+            <div class="space-y-4">
+                <div class="flex items-center justify-between border-b border-gray-800 pb-2">
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                        <span class="text-neonPink">⚡</span> 게임 목록 미리보기
+                    </h2>
+                    <button onclick="showSection('arcade')" class="text-xs text-neonBlue hover:underline">모든 게임 보기 &rarr;</button>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- 게임 카드 1 -->
+                    <div class="group border border-gray-800 hover:border-neonGreen bg-[#121420] rounded-xl overflow-hidden transition-all duration-300">
+                        <div class="h-32 bg-gradient-to-br from-green-900/30 to-black flex items-center justify-center text-5xl group-hover:scale-105 transition-transform duration-300">🐍</div>
+                        <div class="p-4 space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-white group-hover:text-neonGreen transition-colors">네온 스네이크</span>
+                                <span class="text-[10px] bg-neonGreen/10 text-neonGreen px-2 py-0.5 rounded border border-neonGreen/30">CLASSIC</span>
+                            </div>
+                            <p class="text-xs text-gray-400">사과를 먹을수록 점점 길어지는 꼬리! 벽과 스스로를 피하세요.</p>
+                            <button onclick="selectGame('snake')" class="w-full mt-2 py-2 text-xs font-semibold bg-gray-800 hover:bg-neonGreen hover:text-black rounded transition-all text-center">플레이 하기</button>
+                        </div>
+                    </div>
+                    <!-- 게임 카드 2 -->
+                    <div class="group border border-gray-800 hover:border-neonPink bg-[#121420] rounded-xl overflow-hidden transition-all duration-300">
+                        <div class="h-32 bg-gradient-to-br from-pink-900/30 to-black flex items-center justify-center text-5xl group-hover:scale-105 transition-transform duration-300">🧱</div>
+                        <div class="p-4 space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-white group-hover:text-neonPink transition-colors">벽돌 깨기 마스터</span>
+                                <span class="text-[10px] bg-neonPink/10 text-neonPink px-2 py-0.5 rounded border border-neonPink/30">ACTION</span>
+                            </div>
+                            <p class="text-xs text-gray-400">공을 떨어뜨리지 말고 하늘의 모든 네온 블록을 산산조각 내세요!</p>
+                            <button onclick="selectGame('brick')" class="w-full mt-2 py-2 text-xs font-semibold bg-gray-800 hover:bg-neonPink hover:text-black rounded transition-all text-center">플레이 하기</button>
+                        </div>
+                    </div>
+                    <!-- 게임 카드 3 -->
+                    <div class="group border border-gray-800 hover:border-neonBlue bg-[#121420] rounded-xl overflow-hidden transition-all duration-300">
+                        <div class="h-32 bg-gradient-to-br from-blue-900/30 to-black flex items-center justify-center text-5xl group-hover:scale-105 transition-transform duration-300">🏓</div>
+                        <div class="p-4 space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-white group-hover:text-neonBlue transition-colors">네온 핑퐁 (AI 대전)</span>
+                                <span class="text-[10px] bg-neonBlue/10 text-neonBlue px-2 py-0.5 rounded border border-neonBlue/30">VS MODE</span>
+                            </div>
+                            <p class="text-xs text-gray-400">컴퓨터 AI와 겨루는 불꽃 튀는 핑퐁! 난이도가 점점 상승합니다.</p>
+                            <button onclick="selectGame('pong')" class="w-full mt-2 py-2 text-xs font-semibold bg-gray-800 hover:bg-neonBlue hover:text-black rounded transition-all text-center">플레이 하기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= [2. 아케이드 게임 룸 섹션] ================= -->
+        <section id="arcade" class="hidden space-y-6">
+            <div class="flex flex-col lg:flex-row gap-6">
+                
+                <!-- 게임 선택 사이드바 -->
+                <div class="w-full lg:w-1/4 space-y-3">
+                    <h2 class="text-lg font-bold text-white border-b border-gray-800 pb-2">🕹️ 아케이드 기기 선택</h2>
+                    <div class="flex flex-row lg:flex-col gap-2 overflow-x-auto pb-2 lg:pb-0">
+                        <!-- 게임 탭 1 -->
+                        <button id="tab-snake" onclick="selectGame('snake')" class="game-tab-btn flex-1 shrink-0 lg:w-full flex items-center gap-3 px-4 py-3 bg-[#121420] border-l-4 border-neonGreen rounded-r text-left transition-all text-white">
+                            <span class="text-2xl">🐍</span>
+                            <div>
+                                <h4 class="font-bold text-sm">네온 스네이크</h4>
+                                <span class="text-[10px] text-gray-500">최고 기록: <span id="high-snake-tab">0</span></span>
+                            </div>
+                        </button>
+                        <!-- 게임 탭 2 -->
+                        <button id="tab-brick" onclick="selectGame('brick')" class="game-tab-btn flex-1 shrink-0 lg:w-full flex items-center gap-3 px-4 py-3 bg-gray-900 border-l-4 border-transparent rounded-r text-left transition-all text-gray-400 hover:bg-[#121420]">
+                            <span class="text-2xl">🧱</span>
+                            <div>
+                                <h4 class="font-bold text-sm">벽돌 깨기 마스터</h4>
+                                <span class="text-[10px] text-gray-500">최고 기록: <span id="high-brick-tab">0</span></span>
+                            </div>
+                        </button>
+                        <!-- 게임 탭 3 -->
+                        <button id="tab-pong" onclick="selectGame('pong')" class="game-tab-btn flex-1 shrink-0 lg:w-full flex items-center gap-3 px-4 py-3 bg-gray-900 border-l-4 border-transparent rounded-r text-left transition-all text-gray-400 hover:bg-[#121420]">
+                            <span class="text-2xl">🏓</span>
+                            <div>
+                                <h4 class="font-bold text-sm">네온 핑퐁</h4>
+                                <span class="text-[10px] text-gray-500">최고 기록: <span id="high-pong-tab">0</span></span>
+                            </div>
+                        </button>
+                    </div>
+
+                    <!-- 아케이드 콘솔 조작 도움말 -->
+                    <div class="hidden lg:block p-4 bg-[#121420] border border-gray-800 rounded-xl space-y-2 text-xs text-gray-400">
+                        <h4 class="font-semibold text-white">🎮 게임 조작 팁</h4>
+                        <ul class="list-disc pl-4 space-y-1">
+                            <li><strong>키보드:</strong> 방향키(&larr; &rarr; &uarr; &darr;) 또는 A/D 키를 사용하세요.</li>
+                            <li><strong>모바일/터치:</strong> 화면 밑의 네온 가상 컨트롤러를 누르세요.</li>
+                            <li>소리 버튼을 눌러 레트로 신디사이저 효과음을 들을 수 있습니다!</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 게임 모니터 (메인 콘솔) -->
+                <div class="flex-grow space-y-4">
+                    <div class="relative bg-black rounded-2xl border-4 border-[#1A1C29] overflow-hidden shadow-2xl flex flex-col items-center p-4">
+                        
+                        <!-- 모니터 상단 바 -->
+                        <div class="w-full flex justify-between items-center border-b border-gray-800 pb-2 mb-4">
+                            <div class="flex items-center gap-2">
+                                <span id="game-status-led" class="w-3 h-3 rounded-full bg-neonGreen animate-pulse shadow-neonG"></span>
+                                <span id="active-game-title" class="font-black text-sm tracking-widest text-white uppercase">NEON SNAKE</span>
+                            </div>
+                            <!-- 사운드 스위치 -->
+                            <button onclick="toggleSound()" id="sound-btn" class="text-xs px-3 py-1 bg-gray-800 rounded hover:bg-gray-700 text-neonGreen border border-neonGreen/30 shadow-sm flex items-center gap-1">
+                                🔊 Sound: ON
+                            </button>
+                        </div>
+
+                        <!-- 캔버스 컨테이너 (반응형 감싸기) -->
+                        <div class="relative bg-[#08080C] w-full max-w-[400px] aspect-square rounded-lg overflow-hidden border border-gray-900 shadow-inner flex items-center justify-center">
+                            
+                            <!-- 게임 오버 / 시작 오버레이 -->
+                            <div id="game-overlay" class="absolute inset-0 bg-black/90 flex flex-col items-center justify-center text-center p-6 space-y-4 z-20">
+                                <h3 id="overlay-title" class="text-2xl font-black text-neonGreen neon-text-green tracking-wide">READY TO PLAY</h3>
+                                <p id="overlay-desc" class="text-xs text-gray-400">시작 버튼을 누르면 게임이 시작됩니다.</p>
+                                <button id="start-btn" onclick="startGame()" class="px-6 py-3 bg-neonGreen text-black font-extrabold rounded shadow-neonG hover:bg-green-400 transition-all">
+                                    START GAME
+                                </button>
+                            </div>
+
+                            <canvas id="gameCanvas" width="400" height="400" class="block w-full h-full"></canvas>
+                        </div>
+
+                        <!-- 실시간 점수 판 -->
+                        <div class="w-full max-w-[400px] flex justify-between items-center mt-4 bg-[#121420] p-3 rounded-lg border border-gray-800">
+                            <div>
+                                <span class="text-[10px] text-gray-500 block uppercase font-bold">Score</span>
+                                <span id="current-score" class="text-2xl font-bold retro-title text-neonBlue">0000</span>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-[10px] text-gray-500 block uppercase font-bold">Hi-Score</span>
+                                <span id="game-highscore" class="text-2xl font-bold retro-title text-neonPink">0000</span>
+                            </div>
+                        </div>
+
+                        <!-- 모바일 / 가상 방향 패드 -->
+                        <div class="w-full max-w-[400px] mt-6 select-none">
+                            <div id="dpad-container" class="grid grid-cols-3 gap-2 max-w-[180px] mx-auto">
+                                <div></div>
+                                <button id="btn-up" class="w-12 h-12 bg-gray-800 border border-gray-700 active:bg-neonBlue active:text-black rounded-lg flex items-center justify-center text-white text-lg shadow">▲</button>
+                                <div></div>
+                                <button id="btn-left" class="w-12 h-12 bg-gray-800 border border-gray-700 active:bg-neonBlue active:text-black rounded-lg flex items-center justify-center text-white text-lg shadow">◀</button>
+                                <div class="w-12 h-12 flex items-center justify-center text-gray-600 text-xs font-mono">PAD</div>
+                                <button id="btn-right" class="w-12 h-12 bg-gray-800 border border-gray-700 active:bg-neonBlue active:text-black rounded-lg flex items-center justify-center text-white text-lg shadow">▶</button>
+                                <div></div>
+                                <button id="btn-down" class="w-12 h-12 bg-gray-800 border border-gray-700 active:bg-neonBlue active:text-black rounded-lg flex items-center justify-center text-white text-lg shadow">▼</button>
+                                <div></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ================= [3. 수다방 & 방명록 섹션] ================= -->
+        <section id="community" class="hidden space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                
+                <!-- 실시간 수다방 시뮬레이터 -->
+                <div class="border border-gray-800 bg-[#121420] rounded-2xl p-4 sm:p-5 flex flex-col h-[500px]">
+                    <div class="border-b border-gray-800 pb-3 mb-4 flex justify-between items-center">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3.5 h-3.5 rounded-full bg-neonGreen animate-pulse shadow-neonG"></span>
+                            <h3 class="font-bold text-white">동호회 라운지 (수다방)</h3>
+                        </div>
+                        <span class="text-xs text-gray-500" id="user-count">온라인 6명</span>
+                    </div>
+
+                    <!-- 채팅 스크롤 영역 -->
+                    <div id="chat-messages" class="flex-grow overflow-y-auto space-y-3 pr-2 mb-4 text-sm">
+                        <!-- 시스템 메세지 -->
+                        <div class="text-center text-gray-600 text-xs py-1">
+                            --- 레트로 오락실 라운지에 입장하셨습니다 ---
+                        </div>
+                    </div>
+
+                    <!-- 채팅 입력 -->
+                    <form id="chat-form" onsubmit="sendChatMessage(event)" class="flex gap-2">
+                        <input type="text" id="chat-input" placeholder="메시지를 입력해 보세요..." autocomplete="off" class="flex-grow bg-gray-950 border border-gray-800 focus:border-neonGreen focus:outline-none rounded px-3 py-2 text-sm text-white">
+                        <button type="submit" class="px-4 py-2 bg-neonGreen hover:bg-green-400 text-black font-bold rounded text-sm transition-all shadow-neonG">전송</button>
+                    </form>
+                </div>
+
+                <!-- 자유 방명록 -->
+                <div class="border border-gray-800 bg-[#121420] rounded-2xl p-4 sm:p-5 flex flex-col">
+                    <div class="border-b border-gray-800 pb-3 mb-4">
+                        <h3 class="font-bold text-white flex items-center gap-2">
+                            <span class="text-neonPink">📝</span> 방문록 & 흔적 남기기
+                        </h3>
+                    </div>
+
+                    <!-- 방명록 작성 폼 -->
+                    <form id="guestbook-form" onsubmit="addGuestbookEntry(event)" class="space-y-3 mb-6">
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="text" id="gb-nickname" placeholder="닉네임" required class="bg-gray-950 border border-gray-800 focus:border-neonPink focus:outline-none rounded px-3 py-2 text-sm text-white">
+                            <input type="password" id="gb-pwd" placeholder="비밀번호(삭제용)" required class="bg-gray-950 border border-gray-800 focus:border-neonPink focus:outline-none rounded px-3 py-2 text-sm text-white">
+                        </div>
+                        <textarea id="gb-message" placeholder="방문 소감을 한 마디 남겨보세요!" required rows="3" class="w-full bg-gray-950 border border-gray-800 focus:border-neonPink focus:outline-none rounded px-3 py-2 text-sm text-white resize-none"></textarea>
+                        <div class="flex justify-end">
+                            <button type="submit" class="px-5 py-2 bg-neonPink hover:bg-pink-600 text-black font-extrabold rounded text-sm shadow-neonP transition-all">
+                                글 남기기
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- 피드 목록 -->
+                    <div class="flex-grow overflow-y-auto max-h-[220px] space-y-3 pr-2" id="guestbook-list">
+                        <!-- 게시물이 없으면 디폴트 표시 -->
+                        <p class="text-center text-xs text-gray-600 py-6" id="no-gb-msg">방명록이 비어있습니다. 첫 기록을 남겨보세요!</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 커스텀 알림 박스 (브라우저 Alert 방지) -->
+    <div id="custom-alert" class="hidden fixed bottom-6 right-6 z-50 bg-[#121420] border-2 border-neonPink rounded-xl p-4 max-w-sm shadow-neonP animate-slide-in">
+        <div class="flex justify-between items-start gap-3">
+            <div>
+                <h4 class="font-bold text-neonPink text-sm" id="alert-title">알림</h4>
+                <p class="text-xs text-gray-300 mt-1" id="alert-message">내용</p>
+            </div>
+            <button onclick="closeAlert()" class="text-gray-500 hover:text-white text-xs">&times;</button>
+        </div>
+    </div>
+
+    <!-- 하단 푸터 -->
+    <footer class="border-t border-gray-900 bg-[#0A0B10] py-6 px-4 mt-8">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-gray-400">치현이의 놀이터</span>
+                <span>| 개인 취미 오락 동호회 홈페이지</span>
+            </div>
+            <div class="text-center sm:text-right">
+                <p>&copy; 2026 치현이의 놀이터. All rights reserved.</p>
+                <p class="mt-0.5">Powered by HTML5 Canvas & Web Audio API</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 자바스크립트 엔진 -->
+    <script>
+        // --- 1. 앱 전역 데이터 및 네비게이션 관리 ---
+        let currentSection = 'home';
+        let activeGame = 'snake'; 
+        let isSoundOn = true;
+
+        // 사운드 합성을 위한 Web Audio API 관련 변수
+        let audioCtx = null;
+
+        function playSynthBeep(freq, type, duration) {
+            if (!isSoundOn) return;
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = type || 'sine'; // square, sine, triangle, sawtooth
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                // 지수적으로 소리 작아짐
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch(e) {
+                console.log("Audio Error:", e);
+            }
+        }
+
+        // 페이지 섹션 전환
+        function showSection(sectionId) {
+            currentSection = sectionId;
+            document.querySelectorAll('main > section').forEach(sec => {
+                sec.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+
+            // 내비게이션 활성화 탭 표시 업데이트
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.className = "nav-btn px-3 py-2 rounded-lg text-gray-400 hover:text-white transition-all";
+            });
+            
+            // 색상 일치화 작업
+            if (sectionId === 'home') {
+                playSynthBeep(440, 'triangle', 0.15);
+            } else if (sectionId === 'arcade') {
+                playSynthBeep(523.25, 'sine', 0.2);
+                updateHighscoreDisplay();
+                resizeCanvas();
+            } else if (sectionId === 'community') {
+                playSynthBeep(659.25, 'sawtooth', 0.12);
+                loadGuestbook();
+            }
+        }
+
+        // 게임 스위치
+        function selectGame(gameKey) {
+            activeGame = gameKey;
+            showSection('arcade');
+            
+            // 탭 스타일 초기화 후 활성화
+            document.querySelectorAll('.game-tab-btn').forEach(btn => {
+                btn.className = "game-tab-btn flex-1 shrink-0 lg:w-full flex items-center gap-3 px-4 py-3 bg-gray-900 border-l-4 border-transparent rounded-r text-left transition-all text-gray-400 hover:bg-[#121420]";
+            });
+
+            const activeTab = document.getElementById(`tab-${gameKey}`);
+            const titleEl = document.getElementById('active-game-title');
+            const statusLed = document.getElementById('game-status-led');
+            
+            if (gameKey === 'snake') {
+                activeTab.className = "game-tab-btn flex-1 shrink-0 lg:w-full flex items-center gap-3 px-4 py-3 bg-[#121420] border-l-4 border-neonGreen rounded-r text-left transition-all text-white";
+                titleEl.textContent = 'NEON SNAKE';
+                titleEl.className = 'font-black text-sm tracking-widest text-neonGreen uppercase';
+                statusLed.className = 'w-3 h-3 rounded-full bg-neonGreen animate-pulse shadow-neonG';
+            } else if (gameKey === 'brick') {
+                activeTab.className = "game-tab-btn flex-1 shrink-0 lg:w-full flex items-center gap-3 px-4 py-3 bg-[#121420] border-l-4 border-neonPink rounded-r text-left transition-all text-white";
+                titleEl.textContent = 'BRICK BREAK';
+                titleEl.className = 'font-black text-sm tracking-widest text-neonPink uppercase';
+                statusLed.className = 'w-3 h-3 rounded-full bg-neonPink animate-pulse shadow-neonP';
+            } else if (gameKey === 'pong') {
+                activeTab.className = "game-tab-btn flex-1 shrink-0 lg:w-full flex items-center gap-3 px-4 py-3 bg-[#121420] border-l-4 border-neonBlue rounded-r text-left transition-all text-white";
+                titleEl.textContent = 'NEON PONG';
+                titleEl.className = 'font-black text-sm tracking-widest text-neonBlue uppercase';
+                statusLed.className = 'w-3 h-3 rounded-full bg-neonBlue animate-pulse shadow-neonB';
+            }
+
+            // 오버레이 및 점수 초기화
+            stopCurrentGame();
+            document.getElementById('current-score').textContent = '0000';
+            updateHighscoreDisplay();
+            
+            document.getElementById('game-overlay').classList.remove('hidden');
+            document.getElementById('overlay-title').textContent = `${titleEl.textContent}`;
+            document.getElementById('overlay-desc').textContent = 'START 버튼을 눌러 레코드를 갱신하세요!';
+        }
+
+        function toggleSound() {
+            isSoundOn = !isSoundOn;
+            const btn = document.getElementById('sound-btn');
+            if (isSoundOn) {
+                btn.textContent = '🔊 Sound: ON';
+                btn.className = "text-xs px-3 py-1 bg-gray-800 rounded hover:bg-gray-700 text-neonGreen border border-neonGreen/30 shadow-sm flex items-center gap-1";
+                playSynthBeep(440, 'sine', 0.1);
+            } else {
+                btn.textContent = '🔇 Sound: OFF';
+                btn.className = "text-xs px-3 py-1 bg-gray-800 rounded hover:bg-gray-700 text-gray-500 border border-gray-700/30 shadow-sm flex items-center gap-1";
+            }
+        }
+
+        // 자체 알림 시스템
+        function showAlert(title, message) {
+            document.getElementById('alert-title').textContent = title;
+            document.getElementById('alert-message').textContent = message;
+            const panel = document.getElementById('custom-alert');
+            panel.classList.remove('hidden');
+            // 3초 후 자동 해제
+            setTimeout(() => {
+                closeAlert();
+            }, 3000);
+        }
+
+        function closeAlert() {
+            document.getElementById('custom-alert').classList.add('hidden');
+        }
+
+
+        // ================= [4. 3가지 아케이드 게임 엔진 구현] =================
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        let gameLoopId = null;
+        let isGameRunning = false;
+
+        // 공용 터치/키보드 입력 바인딩 관리
+        let keysPressed = {};
+        window.addEventListener('keydown', e => {
+            keysPressed[e.key] = true;
+            if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].includes(e.key)) {
+                e.preventDefault(); // 스크롤 바지
+            }
+        });
+        window.addEventListener('keyup', e => {
+            keysPressed[e.key] = false;
+        });
+
+        // 가상 컨트롤 패드 리스너
+        const dpadBind = (btnId, keyName) => {
+            const el = document.getElementById(btnId);
+            if (!el) return;
+            const startPress = (e) => {
+                e.preventDefault();
+                keysPressed[keyName] = true;
+            };
+            const endPress = (e) => {
+                e.preventDefault();
+                keysPressed[keyName] = false;
+            };
+            el.addEventListener('mousedown', startPress);
+            el.addEventListener('mouseup', endPress);
+            el.addEventListener('touchstart', startPress);
+            el.addEventListener('touchend', endPress);
+        };
+
+        dpadBind('btn-up', 'ArrowUp');
+        dpadBind('btn-down', 'ArrowDown');
+        dpadBind('btn-left', 'ArrowLeft');
+        dpadBind('btn-right', 'ArrowRight');
+
+        function resizeCanvas() {
+            // 반응형 400x400 내부 정밀도 유지
+            canvas.width = 400;
+            canvas.height = 400;
+        }
+
+        // --- GAME 1: Snake 변수 & 로직 ---
+        let snake = [];
+        let snakeFood = {x: 0, y: 0};
+        let snakeDir = {x: 20, y: 0};
+        let snakeNextDir = {x: 20, y: 0};
+        let snakeScore = 0;
+        let snakeSpeed = 150; // ms per update
+
+        function initSnake() {
+            snake = [
+                {x: 100, y: 100},
+                {x: 80, y: 100},
+                {x: 60, y: 100}
+            ];
+            snakeDir = {x: 20, y: 0};
+            snakeNextDir = {x: 20, y: 0};
+            snakeScore = 0;
+            placeSnakeFood();
+        }
+
+        function placeSnakeFood() {
+            snakeFood.x = Math.floor(Math.random() * (canvas.width / 20)) * 20;
+            snakeFood.y = Math.floor(Math.random() * (canvas.height / 20)) * 20;
+            // 몸통 위에 스폰되는 것 예방
+            for (let part of snake) {
+                if (part.x === snakeFood.x && part.y === snakeFood.y) {
+                    placeSnakeFood();
+                    break;
+                }
+            }
+        }
+
+        function runSnakeLoop() {
+            let lastTime = 0;
+            function loop(time) {
+                if (!isGameRunning) return;
+                gameLoopId = requestAnimationFrame(loop);
+                
+                const delta = time - lastTime;
+                if (delta > snakeSpeed) {
+                    lastTime = time;
+                    updateSnake();
+                    drawSnake();
+                }
+            }
+            gameLoopId = requestAnimationFrame(loop);
+        }
+
+        function updateSnake() {
+            // 방향 조작 접수
+            if ((keysPressed['ArrowUp'] || keysPressed['w'] || keysPressed['W']) && snakeDir.y === 0) {
+                snakeNextDir = {x: 0, y: -20};
+            } else if ((keysPressed['ArrowDown'] || keysPressed['s'] || keysPressed['S']) && snakeDir.y === 0) {
+                snakeNextDir = {x: 0, y: 20};
+            } else if ((keysPressed['ArrowLeft'] || keysPressed['a'] || keysPressed['A']) && snakeDir.x === 0) {
+                snakeNextDir = {x: -20, y: 0};
+            } else if ((keysPressed['ArrowRight'] || keysPressed['d'] || keysPressed['D']) && snakeDir.x === 0) {
+                snakeNextDir = {x: 20, y: 0};
+            }
+
+            snakeDir = snakeNextDir;
+
+            const head = {x: snake[0].x + snakeDir.x, y: snake[0].y + snakeDir.y};
+            
+            // 벽 충돌 체크
+            if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height) {
+                onGameOver(snakeScore);
+                return;
+            }
+
+            // 자신 충돌 체크
+            for (let part of snake) {
+                if (head.x === part.x && head.y === part.y) {
+                    onGameOver(snakeScore);
+                    return;
+                }
+            }
+
+            snake.unshift(head);
+
+            // 먹이 충돌 체크
+            if (head.x === snakeFood.x && head.y === snakeFood.y) {
+                snakeScore += 10;
+                document.getElementById('current-score').textContent = String(snakeScore).padStart(4, '0');
+                playSynthBeep(600, 'triangle', 0.08);
+                placeSnakeFood();
+                // 속도 미세 점진 상승
+                if (snakeSpeed > 60) {
+                    snakeSpeed -= 3;
+                }
+            } else {
+                snake.pop();
+            }
+        }
+
+        function drawSnake() {
+            ctx.fillStyle = '#08080C';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // 보이지 않는 네온 서브그리드선
+            ctx.strokeStyle = '#151722';
+            ctx.lineWidth = 1;
+            for (let i = 0; i < canvas.width; i += 20) {
+                ctx.beginPath();
+                ctx.moveTo(i, 0);
+                ctx.lineTo(i, canvas.height);
+                ctx.stroke();
+                
+                ctx.beginPath();
+                ctx.moveTo(0, i);
+                ctx.lineTo(canvas.width, i);
+                ctx.stroke();
+            }
+
+            // 음식 그리기
+            ctx.shadowBlur = 12;
+            ctx.shadowColor = '#FF007F';
+            ctx.fillStyle = '#FF007F';
+            ctx.fillRect(snakeFood.x + 2, snakeFood.y + 2, 16, 16);
+
+            // 뱀 그리기
+            ctx.shadowColor = '#39FF14';
+            snake.forEach((part, index) => {
+                // 머리는 더 강한 색, 몸은 점진적 얇게
+                ctx.fillStyle = index === 0 ? '#39FF14' : '#2be60f';
+                ctx.fillRect(part.x + 1, part.y + 1, 18, 18);
+            });
+            
+            ctx.shadowBlur = 0; // 그림자 영향 리셋
+        }
+
+
+        // --- GAME 2: Brick Breaker 변수 & 로직 ---
+        let bbPaddleWidth = 70;
+        let bbPaddleX = 0;
+        let bbBall = {x: 0, y: 0, vx: 0, vy: 0, r: 6};
+        let bbBricks = [];
+        let bbScore = 0;
+        let bbLives = 3;
+
+        function initBrickBreaker() {
+            bbPaddleX = (canvas.width - bbPaddleWidth) / 2;
+            bbBall.x = canvas.width / 2;
+            bbBall.y = canvas.height - 40;
+            bbBall.vx = 4 * (Math.random() > 0.5 ? 1 : -1);
+            bbBall.vy = -5;
+            bbScore = 0;
+            bbLives = 3;
+
+            // 블록 초기생성
+            bbBricks = [];
+            const rows = 4;
+            const cols = 7;
+            const w = 50;
+            const h = 18;
+            const pad = 6;
+            const offsetLeft = 12;
+            const offsetTop = 40;
+
+            const colors = ['#FF007F', '#00F0FF', '#39FF14', '#FFD700'];
+
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    bbBricks.push({
+                        x: c * (w + pad) + offsetLeft,
+                        y: r * (h + pad) + offsetTop,
+                        w: w,
+                        h: h,
+                        color: colors[r % colors.length],
+                        alive: true
+                    });
+                }
+            }
+        }
+
+        function runBrickBreakerLoop() {
+            function loop() {
+                if (!isGameRunning) return;
+                gameLoopId = requestAnimationFrame(loop);
+                updateBrickBreaker();
+                drawBrickBreaker();
+            }
+            gameLoopId = requestAnimationFrame(loop);
+        }
+
+        function updateBrickBreaker() {
+            // 패들 컨트롤
+            if (keysPressed['ArrowLeft'] || keysPressed['a'] || keysPressed['A']) {
+                bbPaddleX = Math.max(0, bbPaddleX - 6);
+            }
+            if (keysPressed['ArrowRight'] || keysPressed['d'] || keysPressed['D']) {
+                bbPaddleX = Math.min(canvas.width - bbPaddleWidth, bbPaddleX + 6);
+            }
+
+            // 공 움직임
+            bbBall.x += bbBall.vx;
+            bbBall.y += bbBall.vy;
+
+            // 벽 반사
+            if (bbBall.x - bbBall.r < 0) {
+                bbBall.x = bbBall.r;
+                bbBall.vx *= -1;
+                playSynthBeep(300, 'sine', 0.05);
+            }
+            if (bbBall.x + bbBall.r > canvas.width) {
+                bbBall.x = canvas.width - bbBall.r;
+                bbBall.vx *= -1;
+                playSynthBeep(300, 'sine', 0.05);
+            }
+            if (bbBall.y - bbBall.r < 0) {
+                bbBall.y = bbBall.r;
+                bbBall.vy *= -1;
+                playSynthBeep(300, 'sine', 0.05);
+            }
+
+            // 떨어졌을 때 처리 (사망)
+            if (bbBall.y + bbBall.r > canvas.height) {
+                bbLives--;
+                playSynthBeep(150, 'sawtooth', 0.25);
+                if (bbLives <= 0) {
+                    onGameOver(bbScore);
+                    return;
+                } else {
+                    // 공 재생성
+                    bbBall.x = bbPaddleX + bbPaddleWidth / 2;
+                    bbBall.y = canvas.height - 40;
+                    bbBall.vx = 4 * (Math.random() > 0.5 ? 1 : -1);
+                    bbBall.vy = -5;
+                }
+            }
+
+            // 패들 반사
+            if (bbBall.y + bbBall.r >= canvas.height - 25 && bbBall.y - bbBall.r <= canvas.height - 15) {
+                if (bbBall.x >= bbPaddleX && bbBall.x <= bbPaddleX + bbPaddleWidth) {
+                    // 터치 위치에 따른 발사각 분산
+                    let relativeIntersectX = (bbPaddleX + (bbPaddleWidth/2)) - bbBall.x;
+                    let normalizedIntersectX = relativeIntersectX / (bbPaddleWidth/2);
+                    let bounceAngle = normalizedIntersectX * (Math.PI/3); // 최대 60도
+                    
+                    bbBall.vy = -Math.abs(Math.cos(bounceAngle) * 6.5);
+                    bbBall.vx = -Math.sin(bounceAngle) * 6.5;
+
+                    playSynthBeep(450, 'triangle', 0.08);
+                }
+            }
+
+            // 블록 충돌 물리
+            let winGame = true;
+            for (let brick of bbBricks) {
+                if (!brick.alive) continue;
+                winGame = false;
+
+                // 근접 경계 사각형 검사
+                if (bbBall.x + bbBall.r > brick.x && bbBall.x - bbBall.r < brick.x + brick.w &&
+                    bbBall.y + bbBall.r > brick.y && bbBall.y - bbBall.r < brick.y + brick.h) {
+                    
+                    brick.alive = false;
+                    bbScore += 15;
+                    document.getElementById('current-score').textContent = String(bbScore).padStart(4, '0');
+                    playSynthBeep(520, 'sine', 0.06);
+
+                    // 공 반사 물리
+                    let fromLeft = bbBall.x < brick.x;
+                    let fromRight = bbBall.x > brick.x + brick.w;
+                    let fromTop = bbBall.y < brick.y;
+                    let fromBottom = bbBall.y > brick.y + brick.h;
+
+                    if (fromLeft || fromRight) {
+                        bbBall.vx *= -1;
+                    } else if (fromTop || fromBottom) {
+                        bbBall.vy *= -1;
+                    } else {
+                        bbBall.vy *= -1;
+                    }
+                    break;
+                }
+            }
+
+            if (winGame && bbBricks.length > 0) {
+                // 더 높은 점수와 함께 클리어 처리
+                bbScore += 200;
+                onGameOver(bbScore);
+            }
+        }
+
+        function drawBrickBreaker() {
+            ctx.fillStyle = '#08080C';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // 라이프 하트 표시
+            ctx.fillStyle = '#FF007F';
+            ctx.font = '11px sans-serif';
+            ctx.fillText('🔋 LIVES: ' + '❤️'.repeat(bbLives), 15, 22);
+
+            // 패들 그리기 (네온 핑크 테두리)
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = '#FF007F';
+            ctx.fillStyle = '#FF007F';
+            ctx.fillRect(bbPaddleX, canvas.height - 20, bbPaddleWidth, 8);
+
+            // 공 그리기
+            ctx.shadowColor = '#FFFFFF';
+            ctx.fillStyle = '#FFFFFF';
+            ctx.beginPath();
+            ctx.arc(bbBall.x, bbBall.y, bbBall.r, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 블록 그리기
+            bbBricks.forEach(brick => {
+                if (!brick.alive) return;
+                ctx.shadowColor = brick.color;
+                ctx.fillStyle = brick.color;
+                ctx.fillRect(brick.x, brick.y, brick.w, brick.h);
+            });
+
+            ctx.shadowBlur = 0;
+        }
+
+
+        // --- GAME 3: Neon Pong 변수 & 로직 ---
+        let pongBall = {x: 0, y: 0, vx: 0, vy: 0, r: 7};
+        let pongPlayerY = 0;
+        let pongAiY = 0;
+        const pongPaddleH = 50;
+        const pongPaddleW = 8;
+        let pongScore = 0;
+        let pongAiSpeed = 3.2; // AI 추적 강도
+
+        function initPong() {
+            pongBall.x = canvas.width / 2;
+            pongBall.y = canvas.height / 2;
+            pongBall.vx = 4.5 * (Math.random() > 0.5 ? 1 : -1);
+            pongBall.vy = (Math.random() * 3 - 1.5);
+            pongPlayerY = (canvas.height - pongPaddleH) / 2;
+            pongAiY = (canvas.height - pongPaddleH) / 2;
+            pongScore = 0;
+        }
+
+        function runPongLoop() {
+            function loop() {
+                if (!isGameRunning) return;
+                gameLoopId = requestAnimationFrame(loop);
+                updatePong();
+                drawPong();
+            }
+            gameLoopId = requestAnimationFrame(loop);
+        }
+
+        function updatePong() {
+            // 유저 패들 제어
+            if (keysPressed['ArrowUp'] || keysPressed['w'] || keysPressed['W']) {
+                pongPlayerY = Math.max(0, pongPlayerY - 5.5);
+            }
+            if (keysPressed['ArrowDown'] || keysPressed['s'] || keysPressed['S']) {
+                pongPlayerY = Math.min(canvas.height - pongPaddleH, pongPlayerY + 5.5);
+            }
+
+            // AI 패들 추적 제어 (공의 y축 추정)
+            let aiDestY = pongBall.y - (pongPaddleH / 2);
+            let diffY = aiDestY - pongAiY;
+            if (Math.abs(diffY) > 4) {
+                pongAiY += Math.sign(diffY) * pongAiSpeed;
+            }
+            pongAiY = Math.max(0, Math.min(canvas.height - pongPaddleH, pongAiY));
+
+            // 공 비행
+            pongBall.x += pongBall.vx;
+            pongBall.y += pongBall.vy;
+
+            // 천장 및 바닥 벽 충돌
+            if (pongBall.y - pongBall.r < 0) {
+                pongBall.y = pongBall.r;
+                pongBall.vy *= -1;
+                playSynthBeep(260, 'sine', 0.04);
+            }
+            if (pongBall.y + pongBall.r > canvas.height) {
+                pongBall.y = canvas.height - pongBall.r;
+                pongBall.vy *= -1;
+                playSynthBeep(260, 'sine', 0.04);
+            }
+
+            // 플레이어 패들 충돌
+            if (pongBall.x - pongBall.r <= 25 && pongBall.x + pongBall.r >= 15) {
+                if (pongBall.y >= pongPlayerY && pongBall.y <= pongPlayerY + pongPaddleH) {
+                    pongBall.x = 25 + pongBall.r;
+                    pongBall.vx = Math.abs(pongBall.vx) + 0.3; // 속도 소량 누적 증진
+                    // 튕겨나가는 Y 분산 각도
+                    pongBall.vy = ((pongBall.y - (pongPlayerY + pongPaddleH / 2)) / (pongPaddleH / 2)) * 4.5;
+                    pongScore += 10;
+                    document.getElementById('current-score').textContent = String(pongScore).padStart(4, '0');
+                    playSynthBeep(480, 'triangle', 0.07);
+                }
+            }
+
+            // AI 패들 충돌
+            if (pongBall.x + pongBall.r >= canvas.width - 25 && pongBall.x - pongBall.r <= canvas.width - 15) {
+                if (pongBall.y >= pongAiY && pongBall.y <= pongAiY + pongPaddleH) {
+                    pongBall.x = canvas.width - 25 - pongBall.r;
+                    pongBall.vx = -Math.abs(pongBall.vx) - 0.3;
+                    pongBall.vy = ((pongBall.y - (pongAiY + pongPaddleH / 2)) / (pongPaddleH / 2)) * 4.5;
+                    playSynthBeep(400, 'triangle', 0.07);
+                }
+            }
+
+            // 승부 판정 (벽 통과 시)
+            if (pongBall.x < 0) {
+                // 플레이어 패배
+                playSynthBeep(180, 'sawtooth', 0.3);
+                onGameOver(pongScore);
+            } else if (pongBall.x > canvas.width) {
+                // 플레이어 득점 및 AI의 난이도 상향 리셋
+                pongScore += 100;
+                document.getElementById('current-score').textContent = String(pongScore).padStart(4, '0');
+                playSynthBeep(880, 'sine', 0.15);
+                
+                // 리스폰 공
+                pongBall.x = canvas.width / 2;
+                pongBall.y = canvas.height / 2;
+                pongBall.vx = -4.5; // 유저에 유리하게 발사
+                pongBall.vy = (Math.random() * 3 - 1.5);
+                pongAiSpeed = Math.min(6, pongAiSpeed + 0.5); // AI 기동력 상승
+            }
+        }
+
+        function drawPong() {
+            ctx.fillStyle = '#08080C';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // 네온 센터 점선
+            ctx.strokeStyle = '#181B28';
+            ctx.lineWidth = 4;
+            ctx.setLineDash([10, 15]);
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, 0);
+            ctx.lineTo(canvas.width / 2, canvas.height);
+            ctx.stroke();
+            ctx.setLineDash([]); // 원복
+
+            // 플레이어 패들 (네온 블루)
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = '#00F0FF';
+            ctx.fillStyle = '#00F0FF';
+            ctx.fillRect(15, pongPlayerY, pongPaddleW, pongPaddleH);
+
+            // AI 패들 (네온 핑크)
+            ctx.shadowColor = '#FF007F';
+            ctx.fillStyle = '#FF007F';
+            ctx.fillRect(canvas.width - 23, pongAiY, pongPaddleW, pongPaddleH);
+
+            // 공 그리기
+            ctx.shadowColor = '#FFFFFF';
+            ctx.fillStyle = '#FFFFFF';
+            ctx.beginPath();
+            ctx.arc(pongBall.x, pongBall.y, pongBall.r, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.shadowBlur = 0;
+        }
+
+
+        // --- 공용 오락기 컨트롤 기능 ---
+        function stopCurrentGame() {
+            isGameRunning = false;
+            if (gameLoopId) {
+                cancelAnimationFrame(gameLoopId);
+                gameLoopId = null;
+            }
+        }
+
+        function startGame() {
+            stopCurrentGame();
+            
+            // Audio Context 시작 (브라우저 제약 우회)
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            document.getElementById('game-overlay').classList.add('hidden');
+            isGameRunning = true;
+
+            if (activeGame === 'snake') {
+                initSnake();
+                runSnakeLoop();
+            } else if (activeGame === 'brick') {
+                initBrickBreaker();
+                runBrickBreakerLoop();
+            } else if (activeGame === 'pong') {
+                initPong();
+                runPongLoop();
+            }
+
+            playSynthBeep(523.25, 'sine', 0.1);
+            setTimeout(() => playSynthBeep(659.25, 'sine', 0.1), 100);
+            setTimeout(() => playSynthBeep(783.99, 'sine', 0.2), 200);
+        }
+
+        function onGameOver(finalScore) {
+            stopCurrentGame();
+            playSynthBeep(220, 'sawtooth', 0.4);
+
+            // 하이스코어 체크 및 로컬 저장
+            const savedHigh = localStorage.getItem(`high-${activeGame}`) || 0;
+            let isNewRecord = false;
+            if (finalScore > parseInt(savedHigh)) {
+                localStorage.setItem(`high-${activeGame}`, finalScore);
+                isNewRecord = true;
+                updateHighscoreDisplay();
+            }
+
+            document.getElementById('game-overlay').classList.remove('hidden');
+            document.getElementById('overlay-title').innerHTML = isNewRecord ? 
+                '<span class="text-neonPink animate-bounce">NEW RECORD!</span>' : 
+                '<span class="text-gray-500">GAME OVER</span>';
+            document.getElementById('overlay-desc').innerHTML = `최종 점수: <span class="text-neonBlue font-bold">${finalScore}</span><br>다시 도전하려면 START 버튼을 누르세요.`;
+        }
+
+        function updateHighscoreDisplay() {
+            const getScore = (key) => localStorage.getItem(`high-${key}`) || 0;
+
+            // 탭 뱃지 업데이트
+            document.getElementById('high-snake-tab').textContent = getScore('snake');
+            document.getElementById('high-brick-tab').textContent = getScore('brick');
+            document.getElementById('high-pong-tab').textContent = getScore('pong');
+
+            // 활성 게임 하이스코어 모니터판 업데이트
+            const currentHigh = getScore(activeGame);
+            document.getElementById('game-highscore').textContent = String(currentHigh).padStart(4, '0');
+        }
+
+
+        // ================= [5. 수다방 인공지능 시뮬레이터 로직] =================
+        const botUsers = [
+            { name: "레트로광", emoji: "😎", active: true },
+            { name: "키보드워리어", emoji: "⌨️", active: true },
+            { name: "민트맛오징어", emoji: "🦑", active: true },
+            { name: "점수기록관", emoji: "🏆", active: true },
+            { name: "아케이드퀸", emoji: "👸", active: true }
+        ];
+
+        const simulatedChats = [
+            "오늘 스네이크 300점 넘은 사람?",
+            "벽돌 깨기 마스터 진짜 오랜만에 하니까 재밌네ㅋㅋㅋ",
+            "핑퐁 AI 난이도 미친 거 아님? 갈수록 사기치네",
+            "여기 방명록도 쓸 수 있어서 너무 신기함",
+            "퇴근하고 조용히 추억 오락 한판 개꿀잼",
+            "신디사이저 소리 켜두고 하면 감성 오짐ㄷㄷ",
+            "다들 최고점수 몇 점 나왔어?",
+            "플래시 망해서 우울했는데 HTML5가 해법이었군",
+            "운영자님 게임 더 올려주시면 평생 지키겠습니다"
+        ];
+
+        function addChatMessage(sender, text, isSelf = false) {
+            const container = document.getElementById('chat-messages');
+            const messageEl = document.createElement('div');
+            
+            if (isSelf) {
+                messageEl.className = "flex flex-col items-end";
+                messageEl.innerHTML = `
+                    <div class="bg-neonBlue/20 border border-neonBlue/40 text-white rounded-lg px-3 py-1.5 max-w-[80%] rounded-tr-none">
+                        <p class="text-xs break-all">${text}</p>
+                    </div>
+                    <span class="text-[9px] text-gray-500 mt-1">나</span>
+                `;
+            } else {
+                messageEl.className = "flex flex-col items-start";
+                messageEl.innerHTML = `
+                    <span class="text-[10px] text-gray-400 mb-1">${sender}</span>
+                    <div class="bg-gray-800 text-gray-200 rounded-lg px-3 py-1.5 max-w-[80%] rounded-tl-none border border-gray-700/50">
+                        <p class="text-xs break-all">${text}</p>
+                    </div>
+                `;
+            }
+            
+            container.appendChild(messageEl);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function sendChatMessage(event) {
+            event.preventDefault();
+            const input = document.getElementById('chat-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            addChatMessage("나", text, true);
+            input.value = '';
+
+            // 1~2초 후 AI 한 명이 반응
+            setTimeout(() => {
+                const responder = botUsers[Math.floor(Math.random() * botUsers.length)];
+                const responses = [
+                    "오!! 대박",
+                    "ㅋㅋㅋㅋㅋ 진짜 동감",
+                    "아 그렇군요!",
+                    "우와.. 대단해요",
+                    "전 아케이드 룸에서 노는 중ㅋㅋ",
+                    "반갑습니다~!"
+                ];
+                const reply = responses[Math.floor(Math.random() * responses.length)];
+                addChatMessage(`${responder.emoji} ${responder.name}`, reply);
+                playSynthBeep(350, 'sine', 0.05);
+            }, Math.random() * 1000 + 1000);
+        }
+
+        // 백그라운드 무작위 가상 채팅 시뮬레이션
+        function startSimulatedChatRoutine() {
+            setInterval(() => {
+                // 수다방 섹션 활성 상태일 때 대략 12초마다 전송
+                if (currentSection === 'community' && Math.random() > 0.4) {
+                    const sender = botUsers[Math.floor(Math.random() * botUsers.length)];
+                    const msg = simulatedChats[Math.floor(Math.random() * simulatedChats.length)];
+                    addChatMessage(`${sender.emoji} ${sender.name}`, msg);
+                }
+            }, 12000);
+        }
+
+
+        // ================= [6. 로컬 데이터 영구 방명록 로직] =================
+        function loadGuestbook() {
+            const listEl = document.getElementById('guestbook-list');
+            const noMsg = document.getElementById('no-gb-msg');
+            const entries = JSON.parse(localStorage.getItem('playground-guestbook') || '[]');
+            
+            listEl.innerHTML = '';
+            
+            if (entries.length === 0) {
+                noMsg.classList.remove('hidden');
+                listEl.appendChild(noMsg);
+                return;
+            } else {
+                noMsg.classList.add('hidden');
+            }
+
+            entries.reverse().forEach((entry) => {
+                const el = document.createElement('div');
+                el.className = "p-3 bg-gray-900 border border-gray-800 rounded-lg text-xs space-y-1 relative group";
+                el.innerHTML = `
+                    <div class="flex justify-between items-center text-[10px] text-gray-500">
+                        <span class="font-bold text-neonBlue">${entry.nickname}</span>
+                        <span>${entry.date}</span>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed">${entry.message}</p>
+                    <button onclick="deleteGuestbookEntry(${entry.id})" class="absolute top-2 right-2 text-gray-700 hover:text-neonPink transition-colors text-[10px] opacity-0 group-hover:opacity-100">삭제</button>
+                `;
+                listEl.appendChild(el);
+            });
+        }
+
+        function addGuestbookEntry(event) {
+            event.preventDefault();
+            
+            const nickname = document.getElementById('gb-nickname').value.trim();
+            const pwd = document.getElementById('gb-pwd').value;
+            const message = document.getElementById('gb-message').value.trim();
+
+            if (!nickname || !message) return;
+
+            const entries = JSON.parse(localStorage.getItem('playground-guestbook') || '[]');
+            const newEntry = {
+                id: Date.now(),
+                nickname: nickname,
+                pwd: pwd,
+                message: message,
+                date: new Date().toLocaleDateString('ko-KR')
+            };
+
+            entries.push(newEntry);
+            localStorage.setItem('playground-guestbook', JSON.stringify(entries));
+
+            // 입력 폼 정리
+            document.getElementById('gb-nickname').value = '';
+            document.getElementById('gb-pwd').value = '';
+            document.getElementById('gb-message').value = '';
+
+            playSynthBeep(659, 'sine', 0.12);
+            showAlert('작성 완료', '방명록이 등록되었습니다!');
+            loadGuestbook();
+        }
+
+        function deleteGuestbookEntry(id) {
+            const pwdInput = prompt("방명록 작성 시 입력한 비밀번호를 적어주세요:");
+            if (pwdInput === null) return;
+
+            let entries = JSON.parse(localStorage.getItem('playground-guestbook') || '[]');
+            const entry = entries.find(e => e.id === id);
+
+            if (!entry) return;
+
+            if (entry.pwd === pwdInput) {
+                entries = entries.filter(e => e.id !== id);
+                localStorage.setItem('playground-guestbook', JSON.stringify(entries));
+                showAlert('삭제 성공', '방명록을 성공적으로 지웠습니다.');
+                loadGuestbook();
+                playSynthBeep(220, 'sine', 0.2);
+            } else {
+                showAlert('비밀번호 불일치', '입력하신 비밀번호가 다릅니다.');
+                playSynthBeep(180, 'sawtooth', 0.15);
+            }
+        }
+
+
+        // --- 초기 구동 진입점 ---
+        window.onload = function() {
+            // 반응형 캔버스 크기 배정
+            resizeCanvas();
+            // 기본 하이스코어 정보 로드
+            updateHighscoreDisplay();
+            // 가상채팅 루틴 발동
+            startSimulatedChatRoutine();
+            
+            // 첫 기본 가상 인사 채팅 탑재
+            setTimeout(() => {
+                addChatMessage("👾 오락실 매니저", "반갑습니다! 레트로 플레이그라운드에서 추억을 만들어 가세요.");
+                addChatMessage("🦑 민트맛오징어", "오 새로 만든 홈페이지인가요? 네온 스타일 이뻐요!");
+            }, 1000);
+        };
+
+        // 창 크기 변경 시 대응
+        window.addEventListener('resize', resizeCanvas);
+    </script>
+</body>
+</html>
